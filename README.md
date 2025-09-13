@@ -68,3 +68,67 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+PROJECT STURCTURE :
+
+emotion-journal/
+│── public/
+│ ├── index.html
+│ ├── favicon.ico
+│ └── assets/ # static images, logo, icons
+│
+│── src/
+│ ├── api/ # API helpers & services
+│ │ └── api.js
+│ │
+│ ├── components/ # Reusable UI components
+│ │ ├── layout/
+│ │ │ ├── Header.jsx
+│ │ │ ├── Footer.jsx
+│ │ │ └── PageContainer.jsx
+│ │ ├── ui/
+│ │ │ ├── MoodCard.jsx
+│ │ │ ├── MoodSelector.jsx
+│ │ │ ├── ChartComponent.jsx
+│ │ │ └── Loader.jsx
+│ │ └── index.js
+│ │
+│ ├── context/ # Global state management
+│ │ ├── AuthContext.jsx
+│ │ └── MoodContext.jsx
+│ │
+│ ├── hooks/ # Custom React hooks
+│ │ ├── useAuth.js
+│ │ ├── useMoods.js
+│ │ └── useApi.js
+│ │
+│ ├── pages/ # Main app pages
+│ │ ├── Auth/
+│ │ │ ├── Login.jsx
+│ │ │ └── Signup.jsx
+│ │ ├── Journal/
+│ │ │ ├── JournalPage.jsx # add/view moods
+│ │ │ ├── MoodEntryForm.jsx # form for adding moods
+│ │ │ └── Timeline.jsx # shows mood history
+│ │ ├── Analytics/
+│ │ │ └── AnalyticsPage.jsx
+│ │ ├── Profile/
+│ │ │ └── ProfilePage.jsx
+│ │ └── Home.jsx
+│ │
+│ ├── services/ # External API integration
+│ │ ├── imageGenService.js # AI image generator API
+│ │ └── moodService.js # CRUD operations for moods
+│ │
+│ ├── styles/ # Tailwind + custom styles
+│ │ └── globals.css
+│ │
+│ ├── utils/ # Helper functions
+│ │ ├── dateUtils.js
+│ │ └── moodColors.js
+│ │
+│ ├── App.jsx
+│ ├── index.jsx
+│ └── router.jsx # central route config
+│
+└── package.json
