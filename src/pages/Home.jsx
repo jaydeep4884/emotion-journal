@@ -1,14 +1,14 @@
-import React from "react";
 import Header from "../components/layout/Header";
 import Hero from "../components/ui/Hero";
 
-function Journal() {
+const Home = ({ mode, setMode }) => {
   return (
     <>
-      <Header />
+      <Header mode={mode} setMode={setMode} />
       <Hero />
+      {/* rest of your page */}
     </>
   );
-}
+};
 
-export default Journal;
+export default Home;

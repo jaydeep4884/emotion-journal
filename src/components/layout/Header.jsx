@@ -4,6 +4,10 @@ import { Link } from "react-router";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { IoCloseSharp } from "react-icons/io5";
 import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Brand from "../img/logo/brand.png";
 
 const navLinks = [
   { href: "#journal", label: "Journal" },
@@ -12,21 +16,17 @@ const navLinks = [
   { href: "#feedback", label: "Feedback" },
 ];
 
-const Header = () => {
+const Header = ({ mode, setMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="backdrop-blur-lg">
-      <div className="border-b border-gray-800 ">
+    <header className="backdrop-blur-lg bg-white dark:bg-[#121316] transition-colors duration-300">
+      <div className="border-b border-gray-300 dark:border-gray-800">
         <Container maxWidth="lg">
           <nav className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img
-                className="h-8"
-                src="https://www.auraui.com/logo-dark.png"
-                alt="AuraUI Logo"
-              />
+              <img className="h-12" src={Brand} alt="AuraUI Logo" />
             </Link>
 
             {/* Desktop Nav */}
@@ -35,7 +35,7 @@ const Header = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="relative font-medium text-white hover:text-purple-400 
+                  className="relative font-medium text-gray-900 dark:text-white hover:text-purple-400 
                            after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 
                            after:bg-gradient-to-r after:from-purple-500 after:to-pink-500 
                            hover:after:w-full after:transition-all after:duration-300"
@@ -45,8 +45,21 @@ const Header = () => {
               ))}
             </div>
 
-            {/* CTA + Mobile Toggle */}
+            {/* CTA + DarkMode Toggle + Mobile Toggle */}
             <div className="flex items-center gap-4">
+              {/* Dark/Light Mode Toggle */}
+              <IconButton
+                color="inherit"
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}
+              >
+                {mode === "light" ? (
+                  <DarkModeIcon className="text-gray-900" />
+                ) : (
+                  <LightModeIcon className="text-yellow-400" />
+                )}
+              </IconButton>
+
+              {/* Login Button */}
               <Link
                 to="/"
                 className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r 
@@ -54,14 +67,16 @@ const Header = () => {
               >
                 Login
               </Link>
+
+              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden"
+                className="md:hidden"
               >
                 {isMenuOpen ? (
-                  <IoCloseSharp className="w-6 h-6 text-white" />
+                  <IoCloseSharp className="w-6 h-6 text-gray-900 dark:text-white" />
                 ) : (
-                  <HiMiniBars3BottomRight className="w-6 h-6 text-white" />
+                  <HiMiniBars3BottomRight className="w-6 h-6 text-gray-900 dark:text-white" />
                 )}
               </button>
             </div>
@@ -78,7 +93,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="mt-4 bg-[#121316] border border-gray-800 rounded-2xl py-4 sm:hidden"
+              className="mt-4 absolute left-5 right-5 bg-white dark:bg-[#121316] border border-gray-300 dark:border-gray-800 rounded-2xl py-4 sm:hidden shadow-lg"
             >
               <div className="flex flex-col space-y-4 text-center">
                 {navLinks.map((link, i) => (
@@ -90,7 +105,7 @@ const Header = () => {
                   >
                     <Link
                       to={link.href}
-                      className="text-base font-medium text-white"
+                      className="text-base font-medium text-gray-900 dark:text-white"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {link.label}

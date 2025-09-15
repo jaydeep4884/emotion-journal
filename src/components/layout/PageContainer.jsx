@@ -5,7 +5,7 @@ function PageContainer({ children }) {
   return (
     <>
       <Container maxWidth="lg">
-        <div className="my-[50px]">{children}</div>
+        <div className="my-8 sm:my-12">{children}</div>
       </Container>
     </>
   );

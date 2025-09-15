@@ -4,7 +4,7 @@ import PageContainer from "../layout/PageContainer";
 function Hero() {
   return (
     <PageContainer>
-      <h1 className="text-3xl text-center text-white">Hello Guys !!</h1>
+      <h1 className="text-3xl text-center dark:text-white">Hello Guys !!</h1>
     </PageContainer>
   );
 }
