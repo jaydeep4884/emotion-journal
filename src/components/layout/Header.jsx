@@ -7,7 +7,8 @@ import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import Brand from "../img/logo/brand.png";
+import DarkBrand from "../img/logo/brand.png";
+import LightBrand from "../img/logo/lightBrand.png";
 
 const navLinks = [
   { href: "#journal", label: "Journal" },
@@ -18,15 +19,23 @@ const navLinks = [
 
 const Header = ({ mode, setMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <header className="backdrop-blur-lg bg-white dark:bg-[#121316] transition-colors duration-300">
-      <div className="border-b border-gray-300 dark:border-gray-800">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white dark:bg-[#121316] transition-colors duration-300">
+      <div className=" border-b border-gray-300 dark:border-gray-800">
         <Container maxWidth="lg">
           <nav className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img className="h-12" src={Brand} alt="AuraUI Logo" />
+              <img
+                src={LightBrand}
+                alt="Logo"
+                className="block dark:hidden h-12 "
+              />
+              <img
+                src={DarkBrand}
+                alt="Logo"
+                className="hidden dark:block h-12"
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -61,7 +70,7 @@ const Header = ({ mode, setMode }) => {
 
               {/* Login Button */}
               <Link
-                to="/"
+                to="/signup"
                 className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r 
                          from-purple-600 to-pink-500 rounded-full shadow hover:opacity-90"
               >
@@ -93,7 +102,7 @@ const Header = ({ mode, setMode }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="mt-4 absolute left-5 right-5 bg-white dark:bg-[#121316] border border-gray-300 dark:border-gray-800 rounded-2xl py-4 sm:hidden shadow-lg"
+              className="mt-4 absolute left-5 right-5 bg-white dark:bg-[#121316] border border-gray-300 dark:border-gray-800 rounded-2xl py-4  sm:hidden shadow-lg"
             >
               <div className="flex flex-col space-y-4 text-center">
                 {navLinks.map((link, i) => (

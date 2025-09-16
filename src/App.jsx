@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import SignUp from "./auth/SignUp";
+import Login from "./auth/Login";
 
 function App() {
   const [mode, setMode] = useState("dark");
@@ -36,6 +37,7 @@ function App() {
           element={<Home setMode={setMode} mode={mode} />}
         />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </ThemeProvider>
   );

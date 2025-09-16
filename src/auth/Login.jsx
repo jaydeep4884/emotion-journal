@@ -4,9 +4,9 @@ import { InputAdornment, IconButton, TextField, Button } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Field, Form, Formik } from "formik";
 
-const SignUp = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const initialValues = { firstName: "", email: "", password: "" };
+  const initialValues = { email: "", password: "" };
 
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -18,30 +18,23 @@ const SignUp = () => {
       <div className="w-full max-w-sm bg-transparent sm:border sm:border-gray-800 backdrop-blur-xl rounded-2xl p-6 sm:p-8">
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl font-bold text-white">
-          Sign up to
+          Login to
           <br />
           <span className="text-fuchsia-300">Emotions Journal</span>
         </h2>
         <p className="mt-3 text-sm text-gray-400">
-          Already have an account?{" "}
+          Don't have an account?{" "}
           <Link
-            to="/login"
+            to="/signup"
             className="text-fuchsia-200 hover:text-fuchsia-400 hover:underline"
           >
-            Login
+            Register
           </Link>
         </p>
 
         {/* Form */}
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           <Form className="mt-6 space-y-5">
-            <Field
-              as={TextField}
-              label="First Name"
-              variant="standard"
-              name="firstName"
-              fullWidth
-            />
             <Field
               as={TextField}
               label="Email"
@@ -69,13 +62,18 @@ const SignUp = () => {
                 ),
               }}
             />
+            <div className="!mt-3 text-sm text-right text-gray-400">
+              <Link className="hover:underline hover:text-cyan-500">
+                Forgot Password ?
+              </Link>
+            </div>
             <Button
               type="submit"
               variant="contained"
               fullWidth
               className="!mt-6 !font-medium !capitalize"
             >
-              Register
+              Login
             </Button>
           </Form>
         </Formik>
@@ -89,4 +87,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
