@@ -11,7 +11,6 @@ function Hero() {
   const text = [
     "A Journal",
     "A Mood Tracker",
-    "InnerVoice Listener",
     "An AI Artist",
     "Memory Keeper",
     "Emotion Journal",
