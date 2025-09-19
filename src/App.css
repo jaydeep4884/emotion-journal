@@ -4,3 +4,7 @@ body {
   box-sizing: border-box;
   @apply text-gray-900 dark:text-white bg-white dark:bg-[#120e0e];
 }
+
+.ant-card-body {
+  padding: 0 !important;
+}

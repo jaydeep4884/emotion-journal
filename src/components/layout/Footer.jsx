@@ -14,7 +14,7 @@ function Footer() {
 
   return (
     <Container maxWidth="lg">
-      <footer className="relative">
+      <footer className="relative border-t border-gray-300 dark:border-gray-800">
         {/* Content */}
         <div className="relative z-1">
           <div className="py-6 md:py-12">

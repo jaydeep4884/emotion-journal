@@ -9,6 +9,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DarkBrand from "../img/logo/brand.png";
 import LightBrand from "../img/logo/lightBrand.png";
+import ButtonUI from "../ui/ButtonUI";
 
 const navLinks = [
   { href: "#journal", label: "Journal" },
@@ -69,12 +70,8 @@ const Header = ({ mode, setMode }) => {
               </IconButton>
 
               {/* Login Button */}
-              <Link
-                to="/signup"
-                className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r 
-                         from-purple-600 to-pink-500 rounded-full shadow hover:opacity-90"
-              >
-                Login
+              <Link to="/signup">
+                <ButtonUI name="Register" />
               </Link>
 
               {/* Mobile Menu Button */}
