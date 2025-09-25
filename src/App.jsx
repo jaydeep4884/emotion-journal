@@ -40,6 +40,9 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Routes>
     </ThemeProvider>
+    // <>
+    //   <TestingApi />
+    // </>
   );
 }
 

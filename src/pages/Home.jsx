@@ -10,7 +10,6 @@ const Home = ({ mode, setMode }) => {
       <Hero />
       <JournalPage />
       <Footer />
-      {/* rest of your page */}
     </>
   );
 };

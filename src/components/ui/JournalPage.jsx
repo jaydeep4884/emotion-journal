@@ -1,27 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Input, ConfigProvider, theme, Tooltip, Card } from "antd";
+import { Input, ConfigProvider, theme, Tooltip, Card, Skeleton } from "antd";
 import PageContainer from "../layout/PageContainer";
 import { IoSend } from "react-icons/io5";
 import IconButton from "@mui/material/IconButton";
 import { Field, Form, Formik } from "formik";
 import ButtonUI from "./ButtonUI";
 
-const JournalPage = (props) => {
+const JournalPage = () => {
   const { TextArea } = Input;
   const initialValues = { prompt: "" };
 
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
+  const [generatedImage, setGeneratedImage] = useState(
+    "https://dummyimage.com/400x400/cccccc/666666&text=Awaiting+Your+Prompt"
+  ); // Default image
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (values, { resetForm }) => {
+    if (!values.prompt.trim()) return;
+
+    setLoading(true);
+    try {
+      // Add timestamp to avoid caching
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(
+        values.prompt
+      )}?t=${Date.now()}`;
+
+      // Simulate network delay for demo (optional)
+      await new Promise((res) => setTimeout(res, 3000));
+
+      setGeneratedImage(url);
+      resetForm();
+    } catch (err) {
+      console.error("Error generating image:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: theme.darkAlgorithm,
-      }}
-    >
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
       <PageContainer>
         <div className="flex flex-col items-center text-center px-4 gap-5">
           {/* Heading */}
@@ -43,25 +61,19 @@ const JournalPage = (props) => {
           <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             <Form className="flex flex-col space-y-10 sm:space-y-16 w-full max-w-3xl mx-auto">
               {/* TextArea  */}
-              <div
-                className="flex items-center px-3 py-2 rounded-2xl 
-            border border-gray-600 transition-all 
-            dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] 
-            shadow-[0_0_20px_rgba(0,0,0,0.6)] 
-            dark:hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
-              >
+              <div className="flex items-center px-3 py-2 rounded-2xl border border-gray-600 transition-all dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-[0_0_20px_rgba(0,0,0,0.6)] dark:hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]">
                 <Field
                   as={TextArea}
                   size="large"
                   name="prompt"
                   placeholder="Write your thoughts..."
                   autoSize={{ minRows: 2, maxRows: 10 }}
-                  className="flex-1 placeholder-slate-600 dark:placeholder-gray-400 bg-transparent text-black border-none focus:shadow-none focus:bg-transparent hover:bg-transparent dark:text-white resize-none "
+                  className="flex-1 placeholder-slate-600 dark:placeholder-gray-400 bg-transparent text-black border-none focus:shadow-none focus:bg-transparent hover:bg-transparent dark:text-white resize-none"
                 />
 
                 {/* Send button */}
                 <Tooltip title="Submit" color="purple">
-                  <IconButton aria-label="delete" type="submit" size="medium">
+                  <IconButton type="submit" size="medium">
                     <IoSend fontSize="inherit" />
                   </IconButton>
                 </Tooltip>
@@ -69,22 +81,22 @@ const JournalPage = (props) => {
 
               {/* Image Card */}
               <div className="flex justify-center w-full">
-                <Card
-                  hoverable
-                  style={{ width: 400 }}
-                  cover={
+                <Card hoverable style={{ width: 400 }}>
+                  {loading ? (
+                    <Skeleton.Image active />
+                  ) : (
                     <img
                       draggable={false}
-                      alt="example"
-                      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                      alt="AI Generated"
+                      src={generatedImage}
                       className="!rounded-lg"
                     />
-                  }
-                />
+                  )}
+                </Card>
               </div>
 
-              {/* Button Group  */}
-              <div className=" flex gap-5 sm:gap-20 items-center justify-center">
+              {/* Button Group */}
+              <div className="flex gap-5 sm:gap-20 items-center justify-center">
                 <ButtonUI name="Save" />
                 <ButtonUI name="Refresher" />
                 <ButtonUI name="Cancel" />
