@@ -41,7 +41,7 @@ function App() {
       </Routes>
     </ThemeProvider>
     // <>
-    //   <TestingApi />
+    //   <ImageSlider />
     // </>
   );
 }

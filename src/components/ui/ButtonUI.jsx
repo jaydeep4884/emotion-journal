@@ -4,6 +4,7 @@ function ButtonUI(props) {
   return (
     <button
       type="button"
+      onClick={props.onclick}
       className="relative inline-block p-px font-semibold leading-6 text-white no-underline bg-gray-800 shadow-2xl cursor-pointer group rounded-xl shadow-zinc-900"
     >
       <span className="absolute inset-0 overflow-hidden rounded-xl">
