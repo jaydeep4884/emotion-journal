@@ -1,4 +1,4 @@
-import { BsLinkedin, BsTelegram, BsTwitter } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { Link } from "react-router";
 import DarkBrand from "../img/logo/brand.png";
 import LightBrand from "../img/logo/lightBrand.png";
@@ -8,8 +8,14 @@ function Footer() {
   const navLinks = ["Journal", "Timelines", "Analytics", "Feedback"];
   const socialIcons = [
     { icon: <BsTwitter className="w-5 h-5" />, href: "/" },
-    { icon: <BsTelegram className="w-5 h-5" />, href: "/" },
-    { icon: <BsLinkedin className="w-5 h-5" />, href: "/" },
+    {
+      icon: <BsGithub className="w-5 h-5" />,
+      href: "https://github.com/jaydeep4884",
+    },
+    {
+      icon: <BsLinkedin className="w-5 h-5" />,
+      href: "https://www.linkedin.com/in/sagathiya-jaydeep/",
+    },
   ];
 
   return (
