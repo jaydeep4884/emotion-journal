@@ -132,3 +132,6 @@ emotion-journal/
 │ └── router.jsx # central route config
 │
 └── package.json
+
+API_URL : https://myapigenerator.onrender.com/api/
+API_KEY : AvD5BtTs4JYEu7Xp

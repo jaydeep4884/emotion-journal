@@ -10,10 +10,11 @@ import { PageSkeleton } from "./PageSkeleton";
 import ImageSlider from "./ImageSlider";
 
 const JournalPage = () => {
-  const { TextArea } = Input;
-  const initialValues = { prompt: "" };
   const [generatedImage, setGeneratedImage] = useState(false);
   const [loading, setLoading] = useState(false);
+  const date = new Date();
+  const { TextArea } = Input;
+  const initialValues = { prompt: "" };
 
   const handleSubmit = async (values, { resetForm }) => {
     if (!values.prompt.trim()) return;
@@ -30,6 +31,9 @@ const JournalPage = () => {
         setGeneratedImage(url);
         setLoading(false);
       };
+      console.log("Image Url :", url); // Image Url
+      console.log("Prompt :", values.prompt);
+      console.log("Created At :", date.toUTCString());
 
       resetForm();
     } catch (err) {
@@ -73,6 +77,7 @@ const JournalPage = () => {
                   placeholder="Write your thoughts..."
                   autoSize={{ minRows: 2, maxRows: 10 }}
                   className="flex-1 placeholder-slate-600 dark:placeholder-gray-400 bg-transparent text-black border-none focus:shadow-none focus:bg-transparent hover:bg-transparent dark:text-white resize-none"
+                  required
                 />
 
                 {/* Send button */}

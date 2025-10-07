@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PlayArrow, Close } from "@mui/icons-material";
 import PageContainer from "../layout/PageContainer";
 import VideoThumb from "../img/thumb/videoThumb.png";
-import PopupMsg from "./PopupMsg";
+import WarningBox from "./WarningBox";
 
 function Hero() {
   const [index, setIndex] = useState(0);
@@ -29,7 +29,7 @@ function Hero() {
   return (
     <PageContainer>
       {/* Project Under Construction  */}
-      <PopupMsg />
+      <WarningBox />
 
       <section className="pt-20 text-center">
         {/* Heading */}

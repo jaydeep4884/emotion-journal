@@ -56,7 +56,7 @@ function Footer() {
               <div className="flex flex-col items-center sm:items-start">
                 <p className="text-lg font-semibold mb-3">Contact Us</p>
                 <Link
-                  href="mailto:contact@auraui.com"
+                  href="mailto:sagathiyajaydeep66@gmail.com"
                   className="dark:text-gray-300 hover:text-gray-400 text-sm sm:text-base transition-colors"
                 >
                   jaydeepcreatives2024@gmail.com
@@ -70,7 +70,7 @@ function Footer() {
                     {socialIcons.map((item, idx) => (
                       <Link
                         key={idx}
-                        href={item.href}
+                        to={item.href}
                         target="_blank"
                         className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-700 bg-white/5 backdrop-blur-sm hover:bg-blue-500 hover:border-blue-500 hover:text-white dark:text-gray-300 transition-all duration-300"
                       >

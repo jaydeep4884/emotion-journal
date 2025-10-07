@@ -1,20 +1,51 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { InputAdornment, IconButton, TextField, Button } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Field, Form, Formik } from "formik";
+import axios from "axios";
+import { token } from "../contexts/context";
+import { message } from "antd";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const initialValues = { firstName: "", email: "", password: "" };
+  const initialValues = { name: "", email: "", password: "" };
+  const Token = useContext(token);
+  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const res = await axios.post(
+        "https://myapigenerator.onrender.com/auth/signUp",
+        values,
+        {
+          headers: {
+            Authorization: Token,
+          },
+        }
+      );
+      if (res.data.Data.status === "Success") {
+        navigate("/login");
+        messageApi.open({
+          type: "error",
+          content: "User Register Successfully !!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      messageApi.open({
+        type: "warning",
+        content: "Something Went Wrong !!",
+      });
+    } finally {
+      resetForm();
+    }
   };
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4">
+      {contextHolder}
       <div className="w-full max-w-sm bg-transparent sm:border sm:border-gray-800 backdrop-blur-xl rounded-2xl p-6 sm:p-8">
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl font-bold text-white">
@@ -39,7 +70,7 @@ const SignUp = () => {
               as={TextField}
               label="First Name"
               variant="standard"
-              name="firstName"
+              name="name"
               fullWidth
             />
             <Field
