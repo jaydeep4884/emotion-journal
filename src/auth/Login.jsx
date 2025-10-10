@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { InputAdornment, IconButton, TextField, Button } from "@mui/material";
+import { InputAdornment, IconButton, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Field, Form, Formik } from "formik";
 import { token } from "../contexts/context";
 import { message } from "antd";
 import axios from "axios";
+import ButtonUI from "../components/ui/ButtonUI";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const initialValues = { email: "", password: "" };
   const Token = useContext(token);
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Login = () => {
   const isAuthenticate = localStorage.getItem("token") ? true : false;
 
   const handleSubmit = async (values, { resetForm }) => {
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://myapigenerator.onrender.com/auth/login",
@@ -26,16 +29,16 @@ const Login = () => {
           },
         }
       );
-      console.log(res.data);
 
       if (res.data.Status === "Success") {
         localStorage.setItem("token", Token);
-        localStorage.setItem("UserId", JSON.stringify(res.data?.Data?._id));
+        localStorage.setItem("UserId", JSON.stringify(res.data.data._id));
         navigate("/");
         messageApi.open({
           type: "success",
           content: "Login Successfully !!",
         });
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -45,12 +48,13 @@ const Login = () => {
       });
     } finally {
       resetForm();
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (isAuthenticate) {
-      navigate("/home");
+      navigate("/");
     }
   }, [isAuthenticate, navigate]);
 
@@ -59,7 +63,7 @@ const Login = () => {
       {contextHolder}
       <div className="w-full max-w-sm bg-transparent sm:border sm:border-gray-800 backdrop-blur-xl rounded-2xl p-6 sm:p-8">
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">
+        <h2 className="text-3xl sm:text-4xl font-bold dark:text-white">
           Login to
           <br />
           <span className="text-fuchsia-300">Emotions Journal</span>
@@ -109,14 +113,7 @@ const Login = () => {
                 Forgot Password ?
               </Link>
             </div>
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              className="!mt-6 !font-medium !capitalize"
-            >
-              Login
-            </Button>
+            <ButtonUI name="Login" loading={loading} />
           </Form>
         </Formik>
 

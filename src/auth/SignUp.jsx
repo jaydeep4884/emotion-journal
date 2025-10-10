@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { InputAdornment, IconButton, TextField, Button } from "@mui/material";
+import { InputAdornment, IconButton, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Field, Form, Formik } from "formik";
 import axios from "axios";
 import { token } from "../contexts/context";
 import { message } from "antd";
+import ButtonUI from "../components/ui/ButtonUI";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +49,7 @@ const SignUp = () => {
       {contextHolder}
       <div className="w-full max-w-sm bg-transparent sm:border sm:border-gray-800 backdrop-blur-xl rounded-2xl p-6 sm:p-8">
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">
+        <h2 className="text-3xl sm:text-4xl font-bold dark:text-white">
           Sign up to
           <br />
           <span className="text-fuchsia-300">Emotions Journal</span>
@@ -100,14 +101,7 @@ const SignUp = () => {
                 ),
               }}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              className="!mt-6 !font-medium !capitalize"
-            >
-              Register
-            </Button>
+            <ButtonUI name="Register" />
           </Form>
         </Formik>
 

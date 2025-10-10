@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { IoCloseSharp } from "react-icons/io5";
 import Container from "@mui/material/Container";
@@ -10,6 +10,8 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DarkBrand from "../img/logo/brand.png";
 import LightBrand from "../img/logo/lightBrand.png";
 import ButtonUI from "../ui/ButtonUI";
+import UserMenu from "../ui/UserMenu";
+import { auth } from "../../contexts/context";
 
 const navLinks = [
   { href: "#journal", label: "Journal" },
@@ -20,6 +22,15 @@ const navLinks = [
 
 const Header = ({ mode, setMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isAuthenticate = useContext(auth);
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("UserId");
+    navigate("/login");
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white dark:bg-[#121316] transition-colors duration-300">
       <div className=" border-b border-gray-300 dark:border-gray-800">
@@ -56,7 +67,7 @@ const Header = ({ mode, setMode }) => {
             </div>
 
             {/* CTA + DarkMode Toggle + Mobile Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex justify-center items-center gap-4">
               {/* Dark/Light Mode Toggle */}
               <IconButton
                 color="inherit"
@@ -70,9 +81,13 @@ const Header = ({ mode, setMode }) => {
               </IconButton>
 
               {/* Login Button */}
-              <Link to="/signup">
-                <ButtonUI name="Register" />
-              </Link>
+              {isAuthenticate ? (
+                <UserMenu />
+              ) : (
+                <Link to="/login">
+                  <ButtonUI name="Login" onClick={Logout} />
+                </Link>
+              )}
 
               {/* Mobile Menu Button */}
               <button
